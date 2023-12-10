@@ -10,238 +10,157 @@ import CoreLocation
 
 class ViewController: UIViewController,CLLocationManagerDelegate {
     
-    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var weatherLocation: UILabel!
     @IBOutlet weak var currentWeather: UILabel!
     @IBOutlet weak var weatherImage: UIImageView!
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var humidityLabel: UILabel!
     @IBOutlet weak var windLabel: UILabel!
     
+    
+    let locationManager = CLLocationManager()
 
-    //Location Manager
-    private var locationManager = CLLocationManager()
-    private var weather: WeatherModel?
-    
-    //API details
-    private let apiKey = "173c5d2d2b354722ef79a5ecb76cf4e1"
-    private let baseURL = "https://api.openweathermap.org/data/2.5/weather"
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-       // locationLabel.text="loaded"
-            // Check for location services
+        override func viewDidLoad() {
+            super.viewDidLoad()
+
+            // Do any additional setup after loading the view.
             if CLLocationManager.locationServicesEnabled() {
-                // Location services are enabled, check authorization status
-                checkLocationAuthorization()
-            } else {
-                // Location services are not enabled, prompt user to enable
-                print("Location services are not enabled. Prompting user to enable.")
-                let alertController = UIAlertController(
-                    title: "Location Services Disabled",
-                    message: "Please enable location services for this app in Settings.",
-                    preferredStyle: .alert
-                )
-                
-                let settingsAction = UIAlertAction(title: "Settings", style: .default) { _ in
-                    if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
-                        UIApplication.shared.open(settingsURL)
+                locationManager.delegate = self
+                locationManager.desiredAccuracy = kCLLocationAccuracyBest
+                locationManager.requestWhenInUseAuthorization()
+                locationManager.requestAlwaysAuthorization()
+                locationManager.startUpdatingLocation()
+                locationManager.startMonitoringSignificantLocationChanges()
+            }
+        }
+        
+        
+
+        
+        func getWeatherAPI(latatiduCord: String, longitudeCord: String) {
+            guard let url = URL(string:"https://api.openweathermap.org/data/2.5/weather?lat=\(latatiduCord)&lon=\(longitudeCord)&appid=3c9f7ef5c40f00e9188febcb2a8024ae&units=metric") else {
+                return}
+            let task = URLSession.shared.dataTask(with: url) { [self]
+                data, response, error in
+                /* print(data!)
+                 if let data = data, let string = String(data: data, encoding: .utf8){
+                 print(string)*/
+                if let data = data {
+                    let jsonDecoder = JSONDecoder()
+                    do {
+                        let jsonData = try jsonDecoder.decode(Weather.self, from: data)
+                        print(jsonData.name)
+                        print(jsonData.coord)
+                        Task {@MainActor in
+                            self.weatherLocation.text = jsonData.name
+                            self.currentWeather.text = jsonData.weather[0].main
+                            self.temperatureLabel.text = String(jsonData.main.temp) + " °"
+                            self.humidityLabel.text = "Humidity : "+String(jsonData.main.humidity)+"%"
+                            // convert m/h to km/h by multiplying 3.6
+                            let windSpeedKMH = String(format: "%.f", jsonData.wind.speed * 3.6)
+                            self.windLabel.text = "Wind : "+String(windSpeedKMH)+"km/h"
+                            let iconCode = jsonData.weather[0].icon
+                            print(iconCode)
+                            let iconUrl = URL(string: "https://openweathermap.org/img/wn/\(iconCode).png")!
+                            self.WeatherIcon(IconURL: iconUrl, weatherIconView: self.weatherImage)
+                        }
+                        
+                    } catch {
+                        print("SOME ERROR")
                     }
                 }
-                
-                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-                
-                alertController.addAction(settingsAction)
-                alertController.addAction(cancelAction)
-                
-                present(alertController, animated: true, completion: nil)
             }
+            task.resume()
+        }
+            //method to convert URL to Image
+            func WeatherIcon(IconURL: URL, weatherIconView: UIImageView) {
+                    let task = URLSession.shared.dataTask(with: IconURL) { data, _, _ in
+                        guard let data = data else { return }
+                        DispatchQueue.main.async { // Make sure you're on the main thread here
+                            weatherIconView.image = UIImage(data: data)
+                        }
+                    }
+                    task.resume()
+            }
+    
+    
+    func navigateToNextScene(cityName: String){
         
-      //  setupLocationManager()
+        // Instantiate the second view controller from the storyboard
+                 let storyboard = UIStoryboard(name: "Main", bundle: nil) // Use your storyboard name
+                 if let weatherViewController = storyboard.instantiateViewController(withIdentifier: "Weather") as? WeatherViewController {
+                     
+                     // Pass data to the second view controller
+                     //weatherViewController.receivedData = cityName
+                     
+                     navigationController?.pushViewController(weatherViewController, animated: false)
+                     
+                 }
 
     }
-   
-    private func checkLocationAuthorization() {
-            switch locationManager.authorizationStatus {
-            case .authorizedAlways, .authorizedWhenInUse:
-                // Location services are authorized, start updating location
-                locationManager.startUpdatingLocation()
-            case .notDetermined:
-                // Request location access
-                locationManager.requestWhenInUseAuthorization()
-            case .denied, .restricted:
-                // Handle denied/restricted status
-                print("Location services denied or restricted.")
-            default:
-                break
-            }
-        }
-    //Configuring location manager
-    private func setupLocationManager() {
-        locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
-    }
-    
-func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-    guard let location = locations.first?.coordinate else { return }
-    
-    //Get weather in WeatherModel struct
-    getWeather(for: location) { result in
-        switch result {
-        case .success(let weatherResponse):
-            DispatchQueue.main.async {
-                self.weather = WeatherModel(weatherResponse: weatherResponse)
-                self.generateLabels()
-            }
-        case .failure(let error): //Error message on failure
-            print("Error fetching weather: \(error)")
-        }
-    }
-}
-    
-    /*
-     * Function to generate all the label values to display
-     */
-    private func generateLabels() {
-        guard let weather = weather else { return }
         
-        locationLabel.text = "\(weather.city)"
-        
-        //Capitalising first letter
-        let sentenceCaseDescription = weather.weatherDescription.prefix(1).capitalized + weather.weatherDescription.dropFirst()
-        currentWeather.text = "\(sentenceCaseDescription)"
-        
-        // Switch statement to set the image based on the weather icon from API. System images are used
-        switch weather.weatherIcon {
-        case "01d":
-            weatherImage.image = UIImage(systemName: "sun.max.fill")
-        case "01n":
-            weatherImage.image = UIImage(systemName: "moon.fill")
-        case "02d", "02n":
-            weatherImage.image = UIImage(systemName: "cloud.sun.fill")
-        case "03d", "03n":
-            weatherImage.image = UIImage(systemName: "cloud.fill")
-        case "04d", "04n":
-            weatherImage.image = UIImage(systemName: "cloud")
-        case "09d", "09n":
-            weatherImage.image = UIImage(systemName: "cloud.drizzle.fill")
-        case "10d", "10n":
-            weatherImage.image = UIImage(systemName: "cloud.rain.fill")
-        case "11d", "11n":
-            weatherImage.image = UIImage(systemName: "cloud.bolt.fill")
-        case "13d", "13n":
-            weatherImage.image = UIImage(systemName: "cloud.snow.fill")
-        case "50d", "50n":
-            weatherImage.image = UIImage(systemName: "cloud.fog.fill")
-        default:
-            weatherImage.image = UIImage(systemName: "questionmark.diamond.fill")
-        }
-        temperatureLabel.text = " \(weather.temperature)°C"
-        humidityLabel.text = " \(weather.humidity)%"
-        
-        // Convert wind speed from m/s to km/h
-        let windSpeedKmH = (weather.windSpeed * 3.6)
-        //Rounding off to 2 digits
-        windLabel.text = " \(windSpeedKmH.rounded()) km/h"
-    }
-    
-    
-    /**
-     * Make APi call and put it to the struct. Handles API failures
-     */
-    private func getWeather(for coordinates: CLLocationCoordinate2D, completion: @escaping (Result<WeatherResponse, Error>) -> Void) {
-        let urlString = "\(baseURL)?lat=\(coordinates.latitude)&lon=\(coordinates.longitude)&units=metric&appid=\(apiKey)"
-        guard let url = URL(string: urlString) else {
-            completion(.failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil)))
-            return
-        }
-        
-        //Handling error
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            guard let data = data, error == nil else {
-                completion(.failure(error!))
-                return
-            }
-            
-            //Read JSON to WeatherResponse
-            do {
-                let decoder = JSONDecoder()
-                let weatherResponse = try decoder.decode(WeatherResponse.self, from: data)
-                completion(.success(weatherResponse))
-                print(weatherResponse)
-            } catch {
-                completion(.failure(error))
-            }
-        }.resume()
-    }
-    
-    //Structs to support API response
-    private struct WeatherResponse: Codable {
-        let main: Main
-        let weather: [Weather]
-        let wind: Wind
-    }
-    
-    private struct Main: Codable {
-        let temp: Double
-        let humidity: Int
-    }
-    
-    private struct Weather: Codable {
-        let description: String
-        let icon: String
-    }
-    
-    private struct Wind: Codable {
-        let speed: Double
-    }
-    
-    private struct WeatherModel {
-        let city: String
-        let weatherDescription: String
-        let weatherIcon: String
-        let temperature: Double
-        let humidity: Int
-        let windSpeed: Double
-        
-        init(weatherResponse: WeatherResponse) {
-            self.city = "Waterloo" // Simulated location
-            self.weatherDescription = weatherResponse.weather[0].description
-            self.weatherIcon = weatherResponse.weather[0].icon
-            self.temperature = weatherResponse.main.temp
-            self.humidity = weatherResponse.main.humidity
-            self.windSpeed = weatherResponse.wind.speed
-        }
-    }
+       /* func geocodeCityAndCallAPI(_ cityName: String) {
+            let geocoder = CLGeocoder()
 
+            geocoder.geocodeAddressString(cityName) { (placemarks, error) in
+                if let error = error {
+                    print("Geocoding error: \(error.localizedDescription)")
+                    // Handle geocoding error if needed
+                } else if let location = placemarks?.first?.location {
+                    // Use the obtained coordinates
+                    let latitude = location.coordinate.latitude
+                    let longitude = location.coordinate.longitude
+
+                    // Do something with the latitude and longitude
+                    print("City: \(cityName), Latitude: \(latitude), Longitude: \(longitude)")
+
+                    // Call weather API with city coordinates
+                    self.getWeatherAPI(latatiduCord: String(latitude), longitudeCord: String(longitude))
+                }
+            }
+        }*/
+
+    
     @IBAction func showDiscoverLocationAlert(_ sender: Any) {
    
+        // Create the alert controller
+         let alertController = UIAlertController(title: "Input Required", message: "Please enter the name of the city", preferredStyle: .alert)
 
-        let alertController = UIAlertController(
-                   title: "Your Alert Title",
-                   message: "Your alert message goes here.",
-                   preferredStyle: .alert
-               )
+         // Add a text field to the alert controller
+         alertController.addTextField { (cityTextField) in
+             cityTextField.placeholder = "Enter city name"
+         }
 
-               // Add buttons to the alert
-               let okAction = UIAlertAction(title: "OK", style: .default) { _ in
-                   // Handle OK button tap if needed
-               }
-               alertController.addAction(okAction)
+         // Create the OK action
+         let newsAction = UIAlertAction(title: "News", style: .default) { (_) in
+             // Retrieve the city name entered by the user
+             if let cityName = alertController.textFields?[0].text {
+                 // Geocode the city name to get coordinates
+             }
+         }
+        let mapAction = UIAlertAction(title: "Map", style: .default) { (_) in
+             // Retrieve the city name entered by the user
+             if let cityName = alertController.textFields?[0].text {
+                 // Geocode the city name to get coordinates
+                // self.geocodeCityAndCallAPI(cityName)
+             }
+         }
+        let weatherAction = UIAlertAction(title: "Weather", style: .default) { (_) in
+             // Retrieve the city name entered by the user
+             if let cityName = alertController.textFields?[0].text {
+                 // Geocode the city name to get coordinates
+                 self.navigateToNextScene(cityName: cityName)
+             }
+         }
 
-               let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
-                   // Handle Cancel button tap if needed
-               }
-               alertController.addAction(cancelAction)
+         // Add the action to the alert controller
+         alertController.addAction(newsAction)
+         alertController.addAction(weatherAction)
+         alertController.addAction(mapAction)
 
-               let otherAction = UIAlertAction(title: "Other", style: .destructive) { _ in
-                   // Handle Other button tap if needed
-               }
-               alertController.addAction(otherAction)
+         // Present the alert controller
+         self.present(alertController, animated: true, completion: nil)
 
-               // Present the alert
-               present(alertController, animated: true, completion: nil)
-          
     }
     
     
