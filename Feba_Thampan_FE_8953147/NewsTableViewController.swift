@@ -8,7 +8,7 @@
 import UIKit
 
 class NewsTableViewController: UITableViewController {
-    @IBOutlet weak var myCell: UITableViewCell!
+   
     let newsAPIKey = "3086c5840a9e4847839135ccaa53ce87"
 
     // Data model to represent news information
@@ -139,7 +139,7 @@ class NewsTableViewController: UITableViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: "newsCell", for: indexPath)
                 let news = newsData[indexPath.row]
                 
-            myCell.titleLabel?.text=news.title
+            
             // Configure the cell with news information
                 cell.textLabel?.text = news.title
                 cell.detailTextLabel?.text = "Author: \(news.author)\n\(news.source)"
