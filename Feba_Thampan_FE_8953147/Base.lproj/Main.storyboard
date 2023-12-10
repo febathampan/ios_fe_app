@@ -3,6 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Map view configurations" minToolsVersion="14.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -43,6 +44,15 @@
                                 <buttonConfiguration key="configuration" style="tinted" title="Press me to discover the world"/>
                                 <connections>
                                     <action selector="showDiscoverLocationAlert:" destination="I4x-jB-6rj" eventType="touchDown" id="dYE-yE-Hko"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fq8-ZN-n4q">
+                                <rect key="frame" x="145" y="737" width="102" height="55"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="tinted" image="mappin" catalog="system" imagePlacement="bottom" title="Directions"/>
+                                <connections>
+                                    <segue destination="ZGt-xm-gqm" kind="show" id="KPO-Fe-d3q"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -180,11 +190,90 @@
             </objects>
             <point key="canvasLocation" x="-1547.3282442748091" y="-20.422535211267608"/>
         </scene>
+        <!--Map View Controller-->
+        <scene sceneID="Kqh-7H-nbg">
+            <objects>
+                <viewController storyboardIdentifier="Map" id="ZGt-xm-gqm" customClass="MapViewController" customModule="Feba_Thampan_FE_8953147" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6BK-Er-aGE">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W7q-r9-7So">
+                                <rect key="frame" x="20" y="303" width="353" height="510"/>
+                                <standardMapConfiguration key="preferredConfiguration"/>
+                            </mapView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Directions" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mLS-gt-dR7">
+                                <rect key="frame" x="157.66666666666666" y="123" width="78" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yDR-RU-Dkb">
+                                <rect key="frame" x="323" y="128" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="da9-lB-2PL"/>
+                                    <constraint firstAttribute="width" constant="50" id="edj-dE-h8y"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="+"/>
+                                <connections>
+                                    <action selector="changeDestination:" destination="ZGt-xm-gqm" eventType="touchDown" id="N2W-Cm-DUk"/>
+                                </connections>
+                            </button>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="gvi-68-gms">
+                                <rect key="frame" x="18" y="174" width="357" height="31"/>
+                                <connections>
+                                    <action selector="sliderValueChanged:" destination="ZGt-xm-gqm" eventType="valueChanged" id="cSS-jn-lvo"/>
+                                </connections>
+                            </slider>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="yZm-zI-hJq">
+                                <rect key="frame" x="23" y="212" width="149" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="" image="car" catalog="system"/>
+                                    <segment title="" image="bicycle" catalog="system"/>
+                                    <segment title="" image="figure.walk" catalog="system"/>
+                                </segments>
+                                <connections>
+                                    <action selector="modeButtonTapped:" destination="ZGt-xm-gqm" eventType="valueChanged" id="R9g-7K-0Fw"/>
+                                </connections>
+                            </segmentedControl>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="gFv-Mw-jVh"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="mLS-gt-dR7" firstAttribute="centerX" secondItem="6BK-Er-aGE" secondAttribute="centerX" id="7St-KA-LQ3"/>
+                            <constraint firstItem="yDR-RU-Dkb" firstAttribute="top" secondItem="gFv-Mw-jVh" secondAttribute="top" constant="25" id="7tO-fY-IoG"/>
+                            <constraint firstItem="gvi-68-gms" firstAttribute="leading" secondItem="gFv-Mw-jVh" secondAttribute="leading" constant="20" id="CYj-XC-dqC"/>
+                            <constraint firstItem="W7q-r9-7So" firstAttribute="leading" secondItem="gFv-Mw-jVh" secondAttribute="leading" constant="20" id="OJa-ag-4hH"/>
+                            <constraint firstItem="gFv-Mw-jVh" firstAttribute="bottom" secondItem="W7q-r9-7So" secondAttribute="bottom" constant="5" id="Trg-Ua-kD6"/>
+                            <constraint firstItem="gFv-Mw-jVh" firstAttribute="trailing" secondItem="gvi-68-gms" secondAttribute="trailing" constant="20" id="gAl-db-Tuz"/>
+                            <constraint firstItem="mLS-gt-dR7" firstAttribute="top" secondItem="gFv-Mw-jVh" secondAttribute="top" constant="20" id="nqA-T9-Rp3"/>
+                            <constraint firstItem="gFv-Mw-jVh" firstAttribute="trailing" secondItem="yDR-RU-Dkb" secondAttribute="trailing" constant="20" id="qvq-LP-fad"/>
+                            <constraint firstItem="gFv-Mw-jVh" firstAttribute="trailing" secondItem="W7q-r9-7So" secondAttribute="trailing" constant="20" id="wo0-IZ-EBz"/>
+                            <constraint firstItem="W7q-r9-7So" firstAttribute="top" secondItem="gFv-Mw-jVh" secondAttribute="top" constant="200" id="xey-i3-wg9"/>
+                            <constraint firstItem="gvi-68-gms" firstAttribute="top" secondItem="mLS-gt-dR7" secondAttribute="bottom" constant="30" id="zLo-gD-IWU"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="UJm-74-IPp"/>
+                    <connections>
+                        <outlet property="mapView" destination="W7q-r9-7So" id="I5W-Kz-ono"/>
+                        <outlet property="zoomSlider" destination="gvi-68-gms" id="A04-AP-uIB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lag-n3-yHK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2353.4351145038167" y="522.53521126760563"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Profile" width="1080" height="773"/>
+        <image name="bicycle" catalog="system" width="128" height="78"/>
         <image name="bolt" catalog="system" width="100" height="128"/>
         <image name="book-5174879_1920" width="1278" height="1920"/>
+        <image name="car" catalog="system" width="128" height="95"/>
+        <image name="figure.walk" catalog="system" width="95" height="128"/>
+        <image name="mappin" catalog="system" width="106" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

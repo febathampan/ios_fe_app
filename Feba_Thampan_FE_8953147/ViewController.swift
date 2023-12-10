@@ -91,9 +91,17 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
                  if let weatherViewController = storyboard.instantiateViewController(withIdentifier: "Weather") as? WeatherViewController {
                      
                      // Pass data to the second view controller
-                     //weatherViewController.receivedData = cityName
+                     weatherViewController.receivedData = cityName
                      
                      navigationController?.pushViewController(weatherViewController, animated: false)
+                     
+                 }
+        if let mapViewController = storyboard.instantiateViewController(withIdentifier: "Map") as? MapViewController {
+                     
+                     // Pass data to the second view controller
+                     mapViewController.receivedData = cityName
+                     
+                     navigationController?.pushViewController(mapViewController, animated: false)
                      
                  }
 
@@ -142,7 +150,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
              // Retrieve the city name entered by the user
              if let cityName = alertController.textFields?[0].text {
                  // Geocode the city name to get coordinates
-                // self.geocodeCityAndCallAPI(cityName)
+                self.navigateToNextScene(cityName: cityName)
              }
          }
         let weatherAction = UIAlertAction(title: "Weather", style: .default) { (_) in
