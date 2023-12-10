@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E47667F72B260E09001DF5A7 /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47667F62B260E09001DF5A7 /* NewsTableViewCell.swift */; };
 		E48E8BFE2B24CBEF00727BAF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48E8BFD2B24CBEF00727BAF /* AppDelegate.swift */; };
 		E48E8C002B24CBEF00727BAF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48E8BFF2B24CBEF00727BAF /* SceneDelegate.swift */; };
 		E48E8C022B24CBEF00727BAF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48E8C012B24CBEF00727BAF /* ViewController.swift */; };
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E47667F62B260E09001DF5A7 /* NewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
 		E48E8BFA2B24CBEF00727BAF /* Feba_Thampan_FE_8953147.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Feba_Thampan_FE_8953147.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E48E8BFD2B24CBEF00727BAF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E48E8BFF2B24CBEF00727BAF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				E4D0A1112B2525D2000CA79F /* WeatherViewController.swift */,
 				E4D0A1132B253107000CA79F /* MapViewController.swift */,
 				E4C066F52B256D68000EBA05 /* NewsTableViewController.swift */,
+				E47667F62B260E09001DF5A7 /* NewsTableViewCell.swift */,
 			);
 			path = Feba_Thampan_FE_8953147;
 			sourceTree = "<group>";
@@ -281,6 +284,7 @@
 				E48E8C002B24CBEF00727BAF /* SceneDelegate.swift in Sources */,
 				E4D0A1102B2521ED000CA79F /* Weather.swift in Sources */,
 				E4D0A1142B253107000CA79F /* MapViewController.swift in Sources */,
+				E47667F72B260E09001DF5A7 /* NewsTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

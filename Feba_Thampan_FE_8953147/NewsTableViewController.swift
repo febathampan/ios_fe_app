@@ -19,22 +19,7 @@ class NewsTableViewController: UITableViewController {
             var source: String
         }
     // Define the NewsAPIResponse struct to match the NewsAPI JSON structure
-    /* struct NewsAPIResponse: Decodable {
-        let articles: [Article]
-
-        struct Article: Decodable {
-            let title: String
-            let description: String?
-            let author: String
-            let source: Source
-
-            struct Source: Decodable {
-                let name: String
-            }
-        }
-    }*/
-
-    // MARK: - Welcome
+        // MARK: - Welcome
     struct NewsAPIResponse: Codable {
         let articles: [Article]
     }
@@ -126,7 +111,7 @@ class NewsTableViewController: UITableViewController {
             return newsData.count
         }
 
-        override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        /*override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
            /* let cell = tableView.dequeueReusableCell(withIdentifier: "newsCell", for: indexPath)
             let news = newsData[indexPath.row]
 
@@ -146,7 +131,23 @@ class NewsTableViewController: UITableViewController {
                 cell.detailTextLabel?.numberOfLines = 0
 
                 return cell
-        }
+        }*/
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "newsCell", for: indexPath) as! NewsTableViewCell
+
+        // Get the news for the current row
+        let news = newsData[indexPath.row]
+
+        // Populate the labels with news data
+        cell.titleLabel.text = news.title
+        cell.authorLabel.text = "Author: \(news.author)"
+        cell.sourceLabel.text = "Source: \(news.source)"
+        cell.contentLabel.text = news.description
+
+        return cell
+    }
+
+    
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         // Adjust the cell height based on your design
