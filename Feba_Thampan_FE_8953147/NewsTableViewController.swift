@@ -49,9 +49,10 @@ class NewsTableViewController: UITableViewController {
         override func viewDidLoad() {
             super.viewDidLoad()
             title = "Local News"
-            //if selectedCity == nil {
-             //   selectedCity = "waterloo"
-            //}
+            if selectedCity == nil || selectedCity == "" {
+                  selectedCity = "waterloo"
+              }
+
             // Fetch news data when the view loads
             fetchNews()
             
@@ -159,7 +160,6 @@ class NewsTableViewController: UITableViewController {
 
     @IBAction func changeDestination(_ sender: Any) {
         showChangeLocationAlert()
-        fetchNews()
     }
     
     func showChangeLocationAlert(){
@@ -177,6 +177,7 @@ class NewsTableViewController: UITableViewController {
             let changeAction = UIAlertAction(title: "Change", style: .default) { _ in
                 if let cityName = alertController.textFields?.first?.text {
                     self.selectedCity = cityName
+                    self.fetchNews()
                 }
             }
 

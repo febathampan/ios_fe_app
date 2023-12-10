@@ -34,7 +34,7 @@ class MapViewController: UIViewController,MKMapViewDelegate, CLLocationManagerDe
             locationManager.requestWhenInUseAuthorization()
             locationManager.startUpdatingLocation()
             // Access and use the received data
-                    if let name = receivedData{
+                    if let name = receivedData, !name.isEmpty{
                         print("Received data: \(name)")
                         geoCodeCityAndShowRoute(cityName: name)
                     }else {

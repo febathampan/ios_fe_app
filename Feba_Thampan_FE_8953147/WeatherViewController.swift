@@ -35,7 +35,7 @@ let getWeatherIconUrl = "https://openweathermap.org/img/wn/"
     override func viewDidLoad() {
         super.viewDidLoad()
         // Access and use the received data
-                if let name = receivedData{
+                if let name = receivedData, !name.isEmpty{
                     print("Received data: \(name)")
                     getWeatherInformation(name)
                 }else {
@@ -72,9 +72,18 @@ let getWeatherIconUrl = "https://openweathermap.org/img/wn/"
                             //setting values to all variables
                             self.cityName = readableData.name
                             self.currentWeather = readableData.weather[0].description
-                            self.temperature = " \(Double(readableData.main.temp))°C"
-                            self.humidity = " \(Double(readableData.main.humidity))"
-                            self.wind = " \(Double(readableData.wind.speed))"
+                          //self.temperature = " \(Double(readableData.main.temp)-273.15)°C"
+                            
+                            let temperatureCelsius = String(format: "%.2f", Double(readableData.main.temp) - 273.15)
+                            self.temperature = "\(temperatureCelsius)°C"
+                            let humidityPercentage = Int(readableData.main.humidity)
+                            self.humidity = "Humidity: \(humidityPercentage)%"
+
+                            let windSpeedKmPerHour = String(format: "%.2f", readableData.wind.speed * 3.6) // Conversion from m/s to km/h
+                            self.wind = "Wind: \(windSpeedKmPerHour) km/h"
+                            
+                            //self.humidity = "Humidity: \(Double(readableData.main.humidity))"
+                           // self.wind = "Wind: \(Double(readableData.wind.speed))"
                             
                             //getting weather icon
                             let weatherIconUrl = self.getWeatherIconUrl+readableData.weather[0].icon+".png"
