@@ -48,10 +48,13 @@ class NewsTableViewController: UITableViewController {
 
         override func viewDidLoad() {
             super.viewDidLoad()
-            title = "News"
-
+            title = "Local News"
+            //if selectedCity == nil {
+             //   selectedCity = "waterloo"
+            //}
             // Fetch news data when the view loads
             fetchNews()
+            
         }
 
         // Function to fetch news data from NewsAPI.org
@@ -140,8 +143,8 @@ class NewsTableViewController: UITableViewController {
 
         // Populate the labels with news data
         cell.titleLabel.text = news.title
-        cell.authorLabel.text = "Author: \(news.author)"
-        cell.sourceLabel.text = "Source: \(news.source)"
+        cell.authorLabel.text = news.author
+        cell.sourceLabel.text = news.source
         cell.contentLabel.text = news.description
 
         return cell
@@ -154,4 +157,32 @@ class NewsTableViewController: UITableViewController {
         return 220.0
     }
 
+    @IBAction func changeDestination(_ sender: Any) {
+        showChangeLocationAlert()
+        fetchNews()
+    }
+    
+    func showChangeLocationAlert(){
+        let alertController = UIAlertController(
+                title: "Where would you like to go?",
+                message: "Enter your new destination here:",
+                preferredStyle: .alert
+            )
+
+            alertController.addTextField { textField in
+                textField.placeholder = "City name"
+            }
+
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            let changeAction = UIAlertAction(title: "Change", style: .default) { _ in
+                if let cityName = alertController.textFields?.first?.text {
+                    self.selectedCity = cityName
+                }
+            }
+
+            alertController.addAction(cancelAction)
+            alertController.addAction(changeAction)
+
+            present(alertController, animated: true, completion: nil)
+    }
 }
