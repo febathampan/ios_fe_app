@@ -17,6 +17,7 @@
 		E48E8C182B24CBF000727BAF /* Feba_Thampan_FE_8953147Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48E8C172B24CBF000727BAF /* Feba_Thampan_FE_8953147Tests.swift */; };
 		E48E8C222B24CBF000727BAF /* Feba_Thampan_FE_8953147UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48E8C212B24CBF000727BAF /* Feba_Thampan_FE_8953147UITests.swift */; };
 		E48E8C242B24CBF000727BAF /* Feba_Thampan_FE_8953147UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48E8C232B24CBF000727BAF /* Feba_Thampan_FE_8953147UITestsLaunchTests.swift */; };
+		E4C066F62B256D68000EBA05 /* NewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C066F52B256D68000EBA05 /* NewsTableViewController.swift */; };
 		E4D0A1102B2521ED000CA79F /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D0A10F2B2521ED000CA79F /* Weather.swift */; };
 		E4D0A1122B2525D2000CA79F /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D0A1112B2525D2000CA79F /* WeatherViewController.swift */; };
 		E4D0A1142B253107000CA79F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D0A1132B253107000CA79F /* MapViewController.swift */; };
@@ -54,6 +55,7 @@
 		E48E8C1D2B24CBF000727BAF /* Feba_Thampan_FE_8953147UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Feba_Thampan_FE_8953147UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E48E8C212B24CBF000727BAF /* Feba_Thampan_FE_8953147UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feba_Thampan_FE_8953147UITests.swift; sourceTree = "<group>"; };
 		E48E8C232B24CBF000727BAF /* Feba_Thampan_FE_8953147UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feba_Thampan_FE_8953147UITestsLaunchTests.swift; sourceTree = "<group>"; };
+		E4C066F52B256D68000EBA05 /* NewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewController.swift; sourceTree = "<group>"; };
 		E4D0A10F2B2521ED000CA79F /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		E4D0A1112B2525D2000CA79F /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 		E4D0A1132B253107000CA79F /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				E48E8C062B24CBEF00727BAF /* Feba_Thampan_FE_8953147.xcdatamodeld */,
 				E4D0A1112B2525D2000CA79F /* WeatherViewController.swift */,
 				E4D0A1132B253107000CA79F /* MapViewController.swift */,
+				E4C066F52B256D68000EBA05 /* NewsTableViewController.swift */,
 			);
 			path = Feba_Thampan_FE_8953147;
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 				E4D0A1122B2525D2000CA79F /* WeatherViewController.swift in Sources */,
 				E48E8C022B24CBEF00727BAF /* ViewController.swift in Sources */,
 				E48E8BFE2B24CBEF00727BAF /* AppDelegate.swift in Sources */,
+				E4C066F62B256D68000EBA05 /* NewsTableViewController.swift in Sources */,
 				E48E8C002B24CBEF00727BAF /* SceneDelegate.swift in Sources */,
 				E4D0A1102B2521ED000CA79F /* Weather.swift in Sources */,
 				E4D0A1142B253107000CA79F /* MapViewController.swift in Sources */,

@@ -104,6 +104,14 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
                      navigationController?.pushViewController(mapViewController, animated: false)
                      
                  }
+        if let newsViewController = storyboard.instantiateViewController(withIdentifier: "News") as? NewsTableViewController {
+                     
+                     // Pass data to the second view controller
+                     newsViewController.selectedCity = cityName
+                     
+                     navigationController?.pushViewController(newsViewController, animated: false)
+                     
+                 }
 
     }
         
@@ -144,6 +152,8 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
              // Retrieve the city name entered by the user
              if let cityName = alertController.textFields?[0].text {
                  // Geocode the city name to get coordinates
+                 self.navigateToNextScene(cityName: cityName)
+
              }
          }
         let mapAction = UIAlertAction(title: "Map", style: .default) { (_) in
