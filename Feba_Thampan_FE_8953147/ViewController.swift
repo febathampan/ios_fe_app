@@ -84,26 +84,20 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
             }
     
     
-    func navigateToNextScene(cityName: String){
+    func navigateToMapScene(cityName: String){
+        let storyboard = UIStoryboard(name: "Main", bundle: nil) // Use your storyboard name
         
-        // Instantiate the second view controller from the storyboard
-                 let storyboard = UIStoryboard(name: "Main", bundle: nil) // Use your storyboard name
-                 if let weatherViewController = storyboard.instantiateViewController(withIdentifier: "Weather") as? WeatherViewController {
-                     
-                     // Pass data to the second view controller
-                     weatherViewController.receivedData = cityName
-                     
-                     navigationController?.pushViewController(weatherViewController, animated: false)
-                     
-                 }
         if let mapViewController = storyboard.instantiateViewController(withIdentifier: "Map") as? MapViewController {
-                     
-                     // Pass data to the second view controller
-                     mapViewController.receivedData = cityName
-                     
-                     navigationController?.pushViewController(mapViewController, animated: false)
-                     
-                 }
+            
+            // Pass data to the second view controller
+            mapViewController.receivedData = cityName
+            
+            navigationController?.pushViewController(mapViewController, animated: false)
+            
+        }}
+    func navigateToNewsScene(cityName: String){
+        let storyboard = UIStoryboard(name: "Main", bundle: nil) // Use your storyboard name
+
         if let newsViewController = storyboard.instantiateViewController(withIdentifier: "News") as? NewsTableViewController {
                      
                      // Pass data to the second view controller
@@ -113,6 +107,20 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
                      
                  }
 
+    }
+    func navigateToWhetherScene(cityName: String){
+        
+        // Instantiate the second view controller from the storyboard
+        let storyboard = UIStoryboard(name: "Main", bundle: nil) // Use your storyboard name
+        if let weatherViewController = storyboard.instantiateViewController(withIdentifier: "Weather") as? WeatherViewController {
+            
+            // Pass data to the second view controller
+            weatherViewController.receivedData = cityName
+            
+            navigationController?.pushViewController(weatherViewController, animated: false)
+            
+        }
+        
     }
         
        /* func geocodeCityAndCallAPI(_ cityName: String) {
@@ -152,7 +160,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
              // Retrieve the city name entered by the user
              if let cityName = alertController.textFields?[0].text {
                  // Geocode the city name to get coordinates
-                 self.navigateToNextScene(cityName: cityName)
+                 self.navigateToNewsScene(cityName: cityName)
 
              }
          }
@@ -160,14 +168,14 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
              // Retrieve the city name entered by the user
              if let cityName = alertController.textFields?[0].text {
                  // Geocode the city name to get coordinates
-                self.navigateToNextScene(cityName: cityName)
+                self.navigateToMapScene(cityName: cityName)
              }
          }
         let weatherAction = UIAlertAction(title: "Weather", style: .default) { (_) in
              // Retrieve the city name entered by the user
              if let cityName = alertController.textFields?[0].text {
                  // Geocode the city name to get coordinates
-                 self.navigateToNextScene(cityName: cityName)
+                 self.navigateToWhetherScene(cityName: cityName)
              }
          }
 
