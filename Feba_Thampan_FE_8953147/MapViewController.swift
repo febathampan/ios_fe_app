@@ -112,8 +112,9 @@ class MapViewController: UIViewController,MKMapViewDelegate, CLLocationManagerDe
            mapView.setRegion(coordinateRegion, animated: true)
         }
 
+  
     @IBAction func changeDestination(_ sender: Any) {
-            showChangeDestinationAlert()
+    showChangeDestinationAlert()
         }
 
         // Function to handle the mode buttons (Auto, Bike, Walking)
