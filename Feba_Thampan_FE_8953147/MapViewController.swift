@@ -52,41 +52,7 @@ class MapViewController: UIViewController,MKMapViewDelegate, CLLocationManagerDe
             mapView.addAnnotation(annotation)
         }
 
-        // Function to create and display a route on the map
-       /* private func showRoute(destinationCoordinate: CLLocationCoordinate2D) {
-            guard let userLocation = locationManager.location?.coordinate else { return }
 
-            let sourcePlacemark = MKPlacemark(coordinate: userLocation)
-            let destinationPlacemark = MKPlacemark(coordinate: destinationCoordinate)
-
-            let sourceItem = MKMapItem(placemark: sourcePlacemark)
-            let destinationItem = MKMapItem(placemark: destinationPlacemark)
-
-            let request = MKDirections.Request()
-            request.source = sourceItem
-            request.destination = destinationItem
-            request.transportType = selectedMode
-
-            let directions = MKDirections(request: request)
-            directions.calculate { response, error in
-                guard let route = response?.routes.first else {
-                    if let error = error {
-                        print("Error calculating route: \(error.localizedDescription)")
-                    }
-                    return
-                }
-
-                // Remove previous overlays
-                self.mapView.removeOverlays(self.mapView.overlays)
-
-                // Add new route overlay
-                self.mapView.addOverlay(route.polyline, level: .aboveRoads)
-
-                // Fit the map to the route
-                let edgePadding = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-                self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, edgePadding: edgePadding, animated: true)
-            }
-        }*/
     // Function to create and display a route on the map
     private func showRoute() {
         guard let userLocation = locationManager.location?.coordinate, let destinationCoordinate = destinationCoordinate else {
@@ -235,18 +201,6 @@ class MapViewController: UIViewController,MKMapViewDelegate, CLLocationManagerDe
                     self.showRoute()
                 }
         }
-    
 
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

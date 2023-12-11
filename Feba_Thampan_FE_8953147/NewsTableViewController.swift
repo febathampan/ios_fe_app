@@ -36,11 +36,7 @@ class NewsTableViewController: UITableViewController {
         let name: String
     }
     
-    
-    
-    
-
-        // The selected city from the home page
+ // The selected city from the home page
         var selectedCity: String?
 
         // Array to store news data
@@ -115,27 +111,7 @@ class NewsTableViewController: UITableViewController {
             return newsData.count
         }
 
-        /*override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-           /* let cell = tableView.dequeueReusableCell(withIdentifier: "newsCell", for: indexPath)
-            let news = newsData[indexPath.row]
 
-            // Configure the cell with news information
-            cell.textLabel?.text = news.title
-            cell.detailTextLabel?.text = "\(news.description)\nAuthor: \(news.author)\nSource: \(news.source)"
-            cell.detailTextLabel?.numberOfLines = 0
-
-            return cell*/
-            let cell = tableView.dequeueReusableCell(withIdentifier: "newsCell", for: indexPath)
-                let news = newsData[indexPath.row]
-                
-            
-            // Configure the cell with news information
-                cell.textLabel?.text = news.title
-                cell.detailTextLabel?.text = "Author: \(news.author)\n\(news.source)"
-                cell.detailTextLabel?.numberOfLines = 0
-
-                return cell
-        }*/
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "newsCell", for: indexPath) as! NewsTableViewCell
 

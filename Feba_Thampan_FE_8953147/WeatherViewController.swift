@@ -9,6 +9,7 @@ import UIKit
 
 class WeatherViewController: UIViewController {
 
+//Weather API
  let weatherApi = "https://api.openweathermap.org/data/2.5/weather?"
     let weatherApiKey = "173c5d2d2b354722ef79a5ecb76cf4e1"
 let getWeatherIconUrl = "https://openweathermap.org/img/wn/"
@@ -41,7 +42,6 @@ let getWeatherIconUrl = "https://openweathermap.org/img/wn/"
                 }else {
                     getWeatherInformation("Waterloo")
                 }
-        // Do any additional setup after loading the view.
     }
     
     
@@ -51,7 +51,6 @@ let getWeatherIconUrl = "https://openweathermap.org/img/wn/"
             
             print(weatherApiCall)
             
-            // Note this shouls be a VAR in when used in an application as the URL value will change with each call!
             // Create an instance of a URLSession Class and assign the value of your URL to the The URL in the Class
             let urlSession = URLSession(configuration:.default)
             let url = URL(string: weatherApiCall)
@@ -72,7 +71,7 @@ let getWeatherIconUrl = "https://openweathermap.org/img/wn/"
                             //setting values to all variables
                             self.cityName = readableData.name
                             self.currentWeather = readableData.weather[0].description
-                          //self.temperature = " \(Double(readableData.main.temp)-273.15)°C"
+
                             
                             let temperatureCelsius = String(format: "%.2f", Double(readableData.main.temp) - 273.15)
                             self.temperature = "\(temperatureCelsius)°C"
@@ -81,9 +80,6 @@ let getWeatherIconUrl = "https://openweathermap.org/img/wn/"
 
                             let windSpeedKmPerHour = String(format: "%.2f", readableData.wind.speed * 3.6) // Conversion from m/s to km/h
                             self.wind = "Wind: \(windSpeedKmPerHour) km/h"
-                            
-                            //self.humidity = "Humidity: \(Double(readableData.main.humidity))"
-                           // self.wind = "Wind: \(Double(readableData.wind.speed))"
                             
                             //getting weather icon
                             let weatherIconUrl = self.getWeatherIconUrl+readableData.weather[0].icon+".png"
