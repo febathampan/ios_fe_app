@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--My Final-->
         <scene sceneID="Kb2-5f-nhH">
             <objects>
                 <viewController id="I4x-jB-6rj" customClass="ViewController" customModule="Feba_Thampan_FE_8953147" customModuleProvider="target" sceneMemberID="viewController">
@@ -17,17 +17,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.25" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="book-5174879_1920" translatesAutoresizingMaskIntoConstraints="NO" id="x5z-0o-oFG">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.25" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="book-5174879_1920" translatesAutoresizingMaskIntoConstraints="NO" id="x5z-0o-oFG">
                                 <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Final" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IMA-ei-R77">
-                                <rect key="frame" x="175.33333333333334" y="103" width="79.333333333333343" height="25.333333333333343"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q7Z-uV-Xy1">
-                                <rect key="frame" x="30" y="764" width="370" height="35"/>
+                                <rect key="frame" x="30" y="784" width="370" height="35"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="tinted" title="Press me to discover the world"/>
                                 <connections>
@@ -35,46 +30,39 @@
                                 </connections>
                             </button>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WFh-e1-lXD">
-                                <rect key="frame" x="20" y="318.33333333333326" width="390" height="425.66666666666674"/>
+                                <rect key="frame" x="20" y="435" width="390" height="314"/>
                                 <standardMapConfiguration key="preferredConfiguration"/>
                             </mapView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Profile" translatesAutoresizingMaskIntoConstraints="NO" id="5ke-5L-Ahf">
-                                <rect key="frame" x="95" y="148.33333333333334" width="240" height="150.00000000000003"/>
+                                <rect key="frame" x="50" y="150" width="275" height="250"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="iL7-OC-dOB"/>
-                                    <constraint firstAttribute="width" constant="240" id="vQ4-bW-KnK"/>
+                                    <constraint firstAttribute="height" constant="250" id="6y9-62-cc7"/>
+                                    <constraint firstAttribute="width" constant="275" id="Nib-9K-1x9"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="077-CJ-FpY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="077-CJ-FpY" firstAttribute="trailing" secondItem="x5z-0o-oFG" secondAttribute="trailing" id="4B7-Dm-izO"/>
-                            <constraint firstItem="IMA-ei-R77" firstAttribute="centerX" secondItem="u2y-vs-lfT" secondAttribute="centerX" id="4q7-vs-cld"/>
-                            <constraint firstItem="x5z-0o-oFG" firstAttribute="leading" secondItem="077-CJ-FpY" secondAttribute="leading" id="5GX-Us-bIq"/>
-                            <constraint firstItem="Q7Z-uV-Xy1" firstAttribute="top" secondItem="WFh-e1-lXD" secondAttribute="bottom" constant="20" id="FGg-Po-QFh"/>
-                            <constraint firstItem="077-CJ-FpY" firstAttribute="bottom" secondItem="Q7Z-uV-Xy1" secondAttribute="bottom" constant="50" id="I9E-Gh-feD"/>
-                            <constraint firstItem="077-CJ-FpY" firstAttribute="trailing" secondItem="WFh-e1-lXD" secondAttribute="trailing" constant="20" id="JLG-Dq-ebV"/>
-                            <constraint firstItem="WFh-e1-lXD" firstAttribute="leading" secondItem="077-CJ-FpY" secondAttribute="leading" constant="20" id="Lj4-KI-l2u"/>
-                            <constraint firstItem="x5z-0o-oFG" firstAttribute="top" secondItem="u2y-vs-lfT" secondAttribute="top" id="MFQ-XN-GB1"/>
-                            <constraint firstItem="5ke-5L-Ahf" firstAttribute="top" secondItem="IMA-ei-R77" secondAttribute="bottom" constant="20" id="O70-Cd-kw8"/>
-                            <constraint firstItem="WFh-e1-lXD" firstAttribute="top" secondItem="5ke-5L-Ahf" secondAttribute="bottom" constant="20" id="PWm-GW-RhF"/>
-                            <constraint firstItem="5ke-5L-Ahf" firstAttribute="centerX" secondItem="u2y-vs-lfT" secondAttribute="centerX" id="bBU-nA-14x"/>
-                            <constraint firstItem="Q7Z-uV-Xy1" firstAttribute="leading" secondItem="077-CJ-FpY" secondAttribute="leading" constant="30" id="hAV-H8-JJr"/>
-                            <constraint firstItem="IMA-ei-R77" firstAttribute="top" secondItem="077-CJ-FpY" secondAttribute="top" id="jn6-vx-rXc"/>
-                            <constraint firstItem="WFh-e1-lXD" firstAttribute="centerX" secondItem="u2y-vs-lfT" secondAttribute="centerX" id="k3x-ru-IyJ"/>
-                            <constraint firstAttribute="bottom" secondItem="x5z-0o-oFG" secondAttribute="bottom" id="tmO-wP-zZx"/>
-                            <constraint firstItem="077-CJ-FpY" firstAttribute="trailing" secondItem="Q7Z-uV-Xy1" secondAttribute="trailing" constant="30" id="xaR-5c-KtM"/>
+                            <constraint firstItem="WFh-e1-lXD" firstAttribute="top" secondItem="5ke-5L-Ahf" secondAttribute="bottom" constant="35" id="A55-s9-MvV"/>
+                            <constraint firstItem="077-CJ-FpY" firstAttribute="trailing" secondItem="Q7Z-uV-Xy1" secondAttribute="trailing" constant="30" id="B8z-mO-5qn"/>
+                            <constraint firstItem="077-CJ-FpY" firstAttribute="trailing" secondItem="WFh-e1-lXD" secondAttribute="trailing" constant="20" id="BHy-3a-JaE"/>
+                            <constraint firstItem="077-CJ-FpY" firstAttribute="bottom" secondItem="Q7Z-uV-Xy1" secondAttribute="bottom" constant="30" id="Bdm-bw-QJp"/>
+                            <constraint firstItem="Q7Z-uV-Xy1" firstAttribute="leading" secondItem="077-CJ-FpY" secondAttribute="leading" constant="30" id="I2M-WZ-o2y"/>
+                            <constraint firstItem="5ke-5L-Ahf" firstAttribute="top" secondItem="u2y-vs-lfT" secondAttribute="top" constant="150" id="Va4-W9-b6B"/>
+                            <constraint firstItem="WFh-e1-lXD" firstAttribute="leading" secondItem="077-CJ-FpY" secondAttribute="leading" constant="20" id="bcp-Qy-zp3"/>
+                            <constraint firstItem="5ke-5L-Ahf" firstAttribute="leading" secondItem="077-CJ-FpY" secondAttribute="leading" constant="50" id="ejd-BK-HCd"/>
+                            <constraint firstItem="Q7Z-uV-Xy1" firstAttribute="top" secondItem="WFh-e1-lXD" secondAttribute="bottom" constant="35" id="vS2-Kv-hCm"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="1cE-1H-Sk3"/>
+                    <navigationItem key="navigationItem" title="My Final" id="1cE-1H-Sk3"/>
                     <connections>
                         <outlet property="currentLocation" destination="WFh-e1-lXD" id="jcI-WJ-aZv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UHT-ej-JgE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="306.1068702290076" y="-20.422535211267608"/>
+            <point key="canvasLocation" x="305.58139534883719" y="-20.600858369098713"/>
         </scene>
         <!--Weather-->
         <scene sceneID="Qy9-TD-Yoa">
